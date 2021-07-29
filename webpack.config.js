@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     devtool: 'source-map',
@@ -37,16 +38,14 @@ module.exports = {
             {
                 test: /\.scss/,
                 use: [
-                    "style-loader",
+                    {
+						loader: MiniCssExtractPlugin.loader,
+					},
                     {
                         loader: "css-loader",
                         options: {
                             url: false,
                             sourceMap: true,
-                            // 0 => no loaders (default);
-                            // 1 => postcss-loader;
-                            // 2 => postcss-loader, sass-loader
-                            importLoaders: 2
                         }
                     },
                     {
@@ -63,7 +62,11 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin()
         , new webpack.LoaderOptionsPlugin({
             debug: true
-        })
+        }),
+        new MiniCssExtractPlugin({
+			filename: 'css/style.css',
+			ignoreOrder: true,
+		})
     ],
     target: ["web", "es5"],
 }
