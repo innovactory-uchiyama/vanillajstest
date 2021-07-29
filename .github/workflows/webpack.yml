@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x]
     
     steps:
     - uses: actions/checkout@v2
@@ -32,3 +32,10 @@ jobs:
     - name: ls
       run: |
           ls ${{ github.workspace }}/dist
+
+    - name: Deploy 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp --recursive --region ap-northeast-1 build s3://uchiyama-pagetest
