@@ -1,7 +1,10 @@
 .decorate-button {
-    background-color: lightblue;
+    background-color: rgb(186, 216, 190);
     outline: darkgrey ;
     outline-style: double;
     width: fit-content;
-    padding: 0 10;
+    .button-text {
+        margin: 10px;
+        user-select: none;
+    }
 }
