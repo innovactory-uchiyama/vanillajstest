@@ -1,4 +1,4 @@
-import { increment } from "./modules/part_of_js";
+import { increment } from "./js/part_of_js";
 import "./css/button.scss"
 import robotImg from "./assets/img/robot.png";
 
