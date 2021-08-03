@@ -4,3 +4,4 @@ dist/*
 !dist/favicon.ico
 .vscode
 yarn.lock
+.github
