@@ -2,14 +2,13 @@ import { increment } from "./js/part_of_js";
 import "./css/button.scss"
 import robotImg from "./assets/img/robot.png";
 
-console.log('loaded js')
-
 var count = -1
 var counter = document.createElement('p');
 counter.textContent = count.toString()
 
 const root = document.getElementById("root")
 if (root) {
+    root.appendChild(createDecorateButton())
     counter.textContent = increment(count)
     root.appendChild(counter)
     var img = new Image()
@@ -17,11 +16,15 @@ if (root) {
     root.appendChild(img)
 }
 
-const elements = document.getElementsByClassName("decorate-button");
-
-for (let index = 0; index < elements.length; index++) {
-    const element = elements[index];
-    element.addEventListener("click", () => {
+function createDecorateButton() {
+    const button = document.createElement("div");
+    button.className = 'decorate-button'
+    const buttonText = document.createElement('p')
+    buttonText.className = 'button-text'
+    buttonText.textContent = 'BUTTON'
+    button.appendChild(buttonText)
+    button.addEventListener("click", () => {
         counter.textContent = increment(parseInt(counter.textContent))
     });
+    return button
 }

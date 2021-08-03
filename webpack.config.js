@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 module.exports = (env, argv) => {
+    const isProduction = argv.mode === 'production'
     configData = {
         //バンドルファイルの設定
         output: {
@@ -8,6 +9,7 @@ module.exports = (env, argv) => {
             //バンドル後のjs
             filename: 'bundle.js',
             publicPath: '/',
+            assetModuleFilename: 'images/[hash][ext][query]'
         },
         entry: './src/index.js',
         module: {
@@ -27,20 +29,19 @@ module.exports = (env, argv) => {
                     ],
                 },
                 {
-                    test: /\.scss/,
+                    test: /\.(css|scss|sass)$/,
                     use: [
                         "style-loader",
                         {
                             loader: "css-loader",
                             options: {
-                                url: false,
-                                sourceMap: true,
+                                sourceMap: !isProduction,
                             }
                         },
                         {
                             loader: "sass-loader",
                             options: {
-                                sourceMap: true
+                                sourceMap: !isProduction
                             },
                         }
                     ]
@@ -55,7 +56,7 @@ module.exports = (env, argv) => {
         ],
         target: ['web', 'es5'],
     }
-    if (argv.mode === 'production') {
+    if (isProduction) {
     }
     else {
         configData.devtool = 'source-map'
@@ -70,7 +71,7 @@ module.exports = (env, argv) => {
             // hot: true,
             inline: true
         }
-        configData.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]'
+        configData.output.devtoolModuleFilenameTemplate = '[resource-path]'
     }
     return configData
 }
