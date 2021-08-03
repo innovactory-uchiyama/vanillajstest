@@ -8,3 +8,17 @@
         user-select: none;
     }
 }
+
+.decorate-button:hover {
+    animation: buttonAnimation 0.5s ease-in-out 0.5s 4 alternate forwards running;
+}
+
+@keyframes buttonAnimation {
+    0% {
+        color: black;
+    }
+
+    100% {
+        color: darkgrey;
+    }
+}

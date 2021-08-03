@@ -24,7 +24,7 @@ function createDecorateButton() {
     buttonText.textContent = 'BUTTON'
     button.appendChild(buttonText)
     button.addEventListener("click", () => {
-        counter.textContent = increment(parseInt(counter.textContent))
+        counter.textContent = increment(parseInt(counter.textContent, 10))
     });
     return button
 }

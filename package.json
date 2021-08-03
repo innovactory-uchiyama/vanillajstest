@@ -5,10 +5,8 @@
   "main": "src/index.js",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.14.8",
-    "@babel/preset-env": "^7.14.8",
-    "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
+    "sass": "^1.37.2",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
     "webpack": "^5.47.0",
@@ -19,7 +17,5 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production"
   },
-  "dependencies": {
-    "sass": "^1.36.0"
-  }
+  "dependencies": {}
 }

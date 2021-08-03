@@ -15,31 +15,17 @@ module.exports = (env, argv) => {
         module: {
             rules: [
                 {
-                    test: /\.js$/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: "babel-loader",
-                            options: {
-                                presets: [
-                                    "@babel/preset-env",
-                                ],
-                            },
-                        },
-                    ],
-                },
-                {
                     test: /\.(css|scss|sass)$/,
                     use: [
-                        "style-loader",
+                        "style-loader",//<head>タグ内にcssを<style>として展開する
                         {
-                            loader: "css-loader",
+                            loader: "css-loader",//jsからimportしたcssをバンドルする
                             options: {
                                 sourceMap: !isProduction,
                             }
                         },
                         {
-                            loader: "sass-loader",
+                            loader: "sass-loader",// sass/scssをcssに変換する
                             options: {
                                 sourceMap: !isProduction
                             },
@@ -47,25 +33,24 @@ module.exports = (env, argv) => {
                     ]
                 },
                 {
-                    test: /\.(png|svg|jpg|jpeg|gif)$/,
+                    test: /\.(png|svg|jpg|jpeg|gif)$/,// js内でimportした画像をバンドルする
                     type: 'asset/resource',
                 },
             ],
         },
-        plugins: [
-        ],
-        target: ['web', 'es5'],
+        target: ['web'],
     }
     if (isProduction) {
+         configData.plugins
     }
-    else {
+    else {// デバッグ時の追加設定
         configData.devtool = 'source-map'
-        //デバッグ方法の設定(webpack serveコマンド等で使用)
         configData.devServer = {
             index: 'index.html',
             contentBase: path.join(__dirname, 'dist'),
-            //ファイル監視
+            // ファイル監視
             watchContentBase: true,
+            // ローカル環境で実行する際に使用するポート
             port: 8080,
             historyApiFallback: true,
             // hot: true,
