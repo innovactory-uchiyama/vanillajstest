@@ -8,7 +8,6 @@ module.exports = (env, argv) => {
             //バンドル後のjs
             filename: 'bundle.js',
             publicPath: '/',
-            devtoolModuleFilenameTemplate: 'webpack://[namespace]/[resource-path]?[loaders]'
         },
         entry: './src/index.js',
         module: {
@@ -59,7 +58,7 @@ module.exports = (env, argv) => {
     if (argv.mode === 'production') {
     }
     else {
-        configData.devtool = 'cheap-module-source-map'
+        configData.devtool = 'source-map'
         //デバッグ方法の設定(webpack serveコマンド等で使用)
         configData.devServer = {
             index: 'index.html',
@@ -71,6 +70,7 @@ module.exports = (env, argv) => {
             // hot: true,
             inline: true
         }
+        configData.output.devtoolModuleFilenameTemplate = '[absolute-resource-path]'
     }
     return configData
 }
